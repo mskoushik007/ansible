@@ -1,0 +1,31 @@
+---
+- name: copying the files
+  hosts: all
+  vars:
+    nam: 'koushik'
+    place: 'mysuru'
+    sports: 'cricket'
+  tasks:
+    - name: cp the file from source to destination
+      copy:
+        src: javaplaybook.yaml
+        dest: /root
+        mode: 0777
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: true   
+    
+    - name: template copy
+      template:
+        src: hello_world.j2
+        dest: /root/hello_word.txt
+      vars:
+        variable_to_be_replaced: 'hi im koushik' 
+        inline_variable: 'hiiii'
+      become: yes     
+     
+    - name: temp
+      template:
+        src: test.j2
+        dest: /root/test.png
+             

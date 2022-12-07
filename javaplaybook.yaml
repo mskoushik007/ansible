@@ -1,0 +1,13 @@
+---
+- name: install java
+  hosts: all
+  tasks:
+    - name: running apt update
+      apt:
+        update_cache: true
+      
+    - name: install default-jdk
+      apt:
+       name: default-jdk
+       state: latest
+      

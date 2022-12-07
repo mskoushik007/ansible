@@ -1,0 +1,33 @@
+---
+- name: installing java tree git normal and with loop
+  hosts: all
+  tasks:
+    - name: updating
+      apt:
+        update_cache: true
+
+    - name: installing java
+      when: inventory_hostname in groups [mychoiceserver] # if you want to install for seperate server
+      apt:
+        name: default-jdk
+        state: latest
+      become: true
+
+        #  - name: installing java git tree
+        # apt:
+        # name:
+        # - default-jdk
+        # - git
+        # - tree
+        # state: latest   
+        #  become: true
+
+    - name: giving multiple packages configuration in standard format
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - default-jdk
+        - git
+        - tree
+      become: true

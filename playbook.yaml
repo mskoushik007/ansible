@@ -1,0 +1,29 @@
+---
+- name: install playbook
+  hosts: all
+  tasks:
+    - name: installing tree
+      apt:
+        name: tree
+        state: latest
+      
+    - name: ensuring ssh running or not
+      service:
+        name: sshd
+        state: started
+
+    - name: install git
+      apt:
+        name: git
+        state: latest
+
+    - name: running apt update
+      apt:
+        update_cache: true
+
+    - name: file is used to create a file or folder
+      file:
+        path: /root/filenew
+        state: touch
+        mode: 0777
+              
